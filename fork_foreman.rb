@@ -1,4 +1,4 @@
-class Forker
+class ForkForeman
   def initialize
     @pids = {}
   end
@@ -28,7 +28,7 @@ end
 
 def loop_test(cmd1, cmd2)
   5.times { puts }
-  f = Forker.new
+  f = ForkForeman.new
   puts "spawning cmd1"
   f.spawn_process('mark', cmd1)
   sleep(25)
