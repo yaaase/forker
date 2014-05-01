@@ -17,8 +17,10 @@ class ForkForeman
       puts "Attempting to kill '#{ name }' which is: #{ pid.inspect }"
       Process.kill('SIGTERM', pid) and Process.wait(pid) if pid
     rescue Errno::ECHILD => e
+      # Does this always happen on successful kill?
       nil
     rescue Exception => e
+      # Maybe care about some other error here
       puts "ERROR: #{ e.class }: #{ e.message }"
     ensure
       @pids[name] = nil
@@ -40,6 +42,8 @@ def loop_test(cmd1, cmd2)
   puts 'exiting loop_test'
   puts "Forker pids: #{ f.instance_variable_get(:@pids).inspect }"
 end
+
+# TODO write some fucking unit tests
 
 cmd1 = 'while true; do echo first_command; sleep 5; done'
 cmd2 = 'while true; do echo second_command; sleep 5; done'
