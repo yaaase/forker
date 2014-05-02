@@ -1,4 +1,6 @@
 class ForkForeman
+  attr_reader :pids
+
   def initialize
     @pids = {}
   end
@@ -45,7 +47,7 @@ def loop_test(cmd1, cmd2)
   f.kill_if_exists('mark')
 
   puts 'exiting loop_test'
-  puts "Forker pids: #{ f.instance_variable_get(:@pids).inspect }"
+  puts "Forker pids: #{ f.pids.inspect }"
 end
 
 # TODO write some fucking unit tests

@@ -19,7 +19,7 @@ describe ForkForeman do
       @ff.instance_variable_set(:@pids, { name => pid })
       expect(Process).to receive(:kill).with('SIGTERM', pid)
       @ff.kill_if_exists(name)
-      @ff.instance_variable_get(:@pids)[name].should be_nil
+      @ff.pids[name].should be_nil
     end
   end
 end
