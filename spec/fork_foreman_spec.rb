@@ -23,3 +23,4 @@ describe ForkForeman do
     end
   end
 end
+
