@@ -10,7 +10,6 @@ class ForkForeman
     kill_if_exists(name)
     @pids[name] = pid = fork { exec(cmd) }
     log("Spawned #{ name } at #{ pid }")
-    #log("pid: #{ pid } ... ps: #{ `ps xau | grep -i #{ pid }` }")
     Process.detach(pid)
   end
 
@@ -22,7 +21,6 @@ class ForkForeman
     rescue Errno::ESRCH => e
       # We do not care if it is already dead
       log("Process at #{ pid.inspect } is already dead")
-      nil
     rescue Exception => e
       # Maybe care about some other error here
       log("ERROR: #{ e.class }: #{ e.message }")
