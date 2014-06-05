@@ -1,7 +1,7 @@
 require_relative '../lib/file_monitor'
 
 describe FileMonitor do
-  before(:each) { @fm = FileMonitor.new(File.join(Dir.pwd, 'monitor')) }
+  before(:each) { %x(mkdir -p ~/forker/monitor); @fm = FileMonitor.new(File.join(Dir.pwd, 'monitor')) }
   after(:each)  { system('rm -f ~/forker/monitor/*') }
 
   it 'monitors a directory in order to observe new files' do
